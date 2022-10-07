@@ -1,8 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MoviesCards = ({movie}) => {
   const {title, release_date, poster_path, vote_average, vote_count, id} = movie;
   const posterUrl = `https://image.tmdb.org/t/p/original/${poster_path}`;
+  const navigate = useNavigate()
+
+  const handleNavigate = id => {
+    navigate(`/movie/${id}`)
+
+  }
     return (
         <div className="card w-96 bg-base-700 shadow-xl image-full mx-auto">
         <img src={posterUrl} alt="Shoes" />
@@ -13,7 +20,7 @@ const MoviesCards = ({movie}) => {
           <span>Vote: {vote_count}</span>
           <span>Rating:<span className='text-warning'> {vote_average} </span> </span>
           <div className="card-actions justify-end">
-            <button className="btn btn-ghost border-secondary">See Details</button>
+            <button className="btn btn-ghost border-secondary" onClick={()=> handleNavigate(id)}>See Details</button>
           </div>
         </div>
        </div>
