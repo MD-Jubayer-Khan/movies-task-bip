@@ -20,7 +20,7 @@ const MoviesCards = ({movie}) => {
           <span>Vote: {vote_count}</span>
           <span>Rating:<span className='text-warning'> {vote_average} </span> </span>
           <div className="card-actions justify-end">
-            <button className="btn btn-ghost border-secondary" onClick={()=> handleNavigate(id)}>See Details</button>
+            <button className="btn btn-ghost border-secondary hover:bg-secondary " onClick={()=> handleNavigate(id)}>See Details</button>
           </div>
         </div>
        </div>

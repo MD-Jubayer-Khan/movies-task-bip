@@ -33,9 +33,9 @@ const AllMovies = () => {
                  }
             </div>
             <div className="btn-group mt-4">
-              <button onClick={handlePrev} className="btn lowercase">«previous</button>
+              <button onClick={handlePrev} className="btn lowercase">« previous</button>
               <button className="btn">Page {page}</button>
-              <button onClick={handleNext} className="btn lowercase px-8">next»</button>
+              <button onClick={handleNext} className="btn lowercase px-8">next »</button>
             </div>
         </div>
     );
