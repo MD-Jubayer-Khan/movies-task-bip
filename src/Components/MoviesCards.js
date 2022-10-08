@@ -12,7 +12,7 @@ const MoviesCards = ({movie}) => {
   }
     return (
         <div className="card w-96 bg-base-700 shadow-xl image-full mx-auto">
-        <img src={posterUrl} alt="Shoes" />
+        <img src={posterUrl} alt="Movie Poster" />
         <div className="card-body">
           <h2 className="card-title mx-auto font-bold">{title}</h2>
           <p></p>

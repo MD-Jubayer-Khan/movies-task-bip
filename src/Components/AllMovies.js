@@ -1,22 +1,73 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import MoviesCards from './MoviesCards';
 
 const AllMovies = () => {
     const [movies, setMovies] = useState([]);
+    const [filter, setFilter] = useState([])
     const [page, setPage] = useState(1)
+    const inputRef = useRef(null);
+
+    const loadMovies = () => {
+        const allMovies = filter
+        setMovies(allMovies)
+      }
 
     useEffect(()=>{
         fetch(`https://movie-task.vercel.app/api/popular?page=${page}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data.data.results)
-                setMovies(data.data.results.slice(0, 18))                    
+                setMovies(data.data.results.slice(0, 18))
+                setFilter(data.data.results.slice(0, 18))                   
         })
     },[page])
 
     if(!movies){
          return <p className='text-3xl font-bold mt-22 text-center'>Loading...</p>        
     }
+
+
+    const handleFilter = (e) => {
+
+        if(e.target.value){
+            const match = filter.filter(movie => movie.release_date.includes(e.target.value));
+              setMovies(match)
+        }
+        else{
+               loadMovies()
+        }
+      
+      }
+
+    const handleFilterClr = () =>{
+        loadMovies()
+    }
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+
+       const searchUrl = `https://movie-task.vercel.app/api/search?page=${page}&query=${inputRef.current.value}`;
+        
+       if(inputRef.current.value){
+            fetch(searchUrl)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data.data.results.total_results === null){
+                    return                                   
+                }
+
+                else{
+                     setMovies(data.data.results.slice(0, 18))  
+                }
+
+            })
+       }
+
+       else{
+        loadMovies()
+       }
+
+      }
 
     const handlePrev = () =>{
         if( page > 1){
@@ -34,11 +85,11 @@ const AllMovies = () => {
         <div>
             <div className='flex place-content-between'>
           <div className='flex'>
-          <select  className=" bg-transparent border border-secondary rounded w-40 ml-20 mb-4 my-2 pl-3 pr-4 font-bold">
+          <select onChange={(e) => handleFilter(e)}  className=" bg-transparent border border-secondary rounded w-40 ml-20 mb-4 my-2 pl-3 pr-4 font-bold">
             <option className='bg-transparent ' disabled selected>Filter by Year</option>
-              {/* {category.map(p => <option key={p.id} >{p.category}</option>)} */}
+              {filter.map(movie => <option key={movie.id} >{movie.release_date}</option>)}
           </select>
-          <div  className='flex ml-3'>
+          <div onClick={handleFilterClr} className='flex ml-3'>
            <p className='text-xl font-bold mt-4 ml-2 text-primary'>Reset</p>
           </div>
         
@@ -46,10 +97,10 @@ const AllMovies = () => {
         
             <div className='flex'>
             <div className="form-control mr-20 my-3">
-                <form className='flex'>
-                     <input   type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />    
-                     <input className='btn btn-outline ml-3 px-8' type="submit" value="Search" />                
-                </form>
+                <div className='flex'>
+                     <input ref={inputRef}  type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" required />    
+                    <button onClick={(e) => handleSearch(e)} className='btn btn-outline ml-3 px-8'> Search</button>               
+                </div>
 
             </div>
             </div>
