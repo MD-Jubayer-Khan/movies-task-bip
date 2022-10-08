@@ -14,7 +14,13 @@ const AllMovies = () => {
 
     useEffect(()=>{
         fetch(`https://movie-task.vercel.app/api/popular?page=${page}`)
-        .then(res => res.json())
+        .then(res => {
+
+            if(res.status === 400){
+                return  <p className='text-3xl font-bold mt-22 text-center'>Failed to load data</p>  
+            }
+            return res.json()})
+
         .then(data => {
                 setMovies(data.data.results.slice(0, 18))
                 setFilter(data.data.results.slice(0, 18))                   
