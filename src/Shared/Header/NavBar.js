@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (
-        <div className="navbar bg-base-200 px-12 mb-4">
+        <div className="navbar px-12 mb-4">
           <div className="flex-1">
             <p className="normal-case text-3xl font-bold"><Link to='/'>Movies Hub </Link></p>
           </div>

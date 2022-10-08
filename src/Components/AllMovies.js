@@ -9,9 +9,14 @@ const AllMovies = () => {
         fetch(`https://movie-task.vercel.app/api/popular?page=${page}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data.data.results);
-             setMovies(data.data.results)})
+            console.log(data.data.results)
+                setMovies(data.data.results.slice(0, 18))                    
+        })
     },[page])
+
+    if(!movies){
+         return <p className='text-3xl font-bold mt-22 text-center'>Loading...</p>        
+    }
 
     const handlePrev = () =>{
         if( page > 1){

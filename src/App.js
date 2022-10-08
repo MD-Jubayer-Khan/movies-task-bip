@@ -8,7 +8,7 @@ import NotFound from './Shared/NotFound';
 
 function App() {
   return (
-    <div className="App bg-ghost">
+    <div className="App bg-ghost bg-[url('../src/mesh-gradient.png')]">
       <NavBar/>
       <Routes>
         <Route path='/' element={<AllMovies></AllMovies>}></Route>

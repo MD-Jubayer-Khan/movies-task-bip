@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const MoviesCards = ({movie}) => {
-  const {title, release_date, poster_path, vote_average, vote_count, id} = movie;
-  const posterUrl = `https://image.tmdb.org/t/p/original/${poster_path}`;
+  const {title, release_date, backdrop_path, vote_average, vote_count, id} = movie;
+  const posterUrl = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
   const navigate = useNavigate()
 
   const handleNavigate = id => {
