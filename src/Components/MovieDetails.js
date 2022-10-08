@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
     const [movieDetails , setMovieDetails] = useState([])
-    console.log(movieDetails);
     const {Id} = useParams();
     const imgSrc = `https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`
 
@@ -26,7 +25,7 @@ const MovieDetails = () => {
             <span>Release: {movieDetails.release_date}</span>
             <span>status: {movieDetails.status} </span>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary"><Link to='/'>Go Home </Link></button>
+              <button className="btn btn-ghost border-secondary hover:bg-secondary "><Link to='/'>Go Home </Link></button>
             </div>
           </div>
         </div>

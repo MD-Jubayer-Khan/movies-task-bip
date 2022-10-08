@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Loading from '../Shared/Loading/Loading';
 import MoviesCards from './MoviesCards';
 
 const AllMovies = () => {
@@ -28,7 +29,7 @@ const AllMovies = () => {
     },[page])
 
     if(!movies){
-         return <p className='text-3xl font-bold mt-22 text-center'>Loading...</p>        
+         return <Loading></Loading>      
     }
 
 
@@ -92,17 +93,17 @@ const AllMovies = () => {
             <div className='flex place-content-between'>
           <div className='flex'>
           <select onChange={(e) => handleFilter(e)}  className=" bg-transparent border border-secondary rounded w-40 ml-20 mb-4 my-2 pl-3 pr-4 font-bold">
-            <option className='bg-transparent ' disabled selected>Filter by Year</option>
+            <option disabled selected>Filter by Year</option>
               {filter.map(movie => <option key={movie.id} >{movie.release_date}</option>)}
           </select>
           <div onClick={handleFilterClr} className='flex ml-3'>
-           <p className='text-xl font-bold mt-4 ml-2 text-primary'>Reset</p>
+           <p className='btn btn-ghost text-xl font-bold mt-2 border-secondary ml-2'>Reset</p>
           </div>
         
           </div>
         
             <div className='flex'>
-            <div className="form-control mr-20 my-3">
+             <div className="form-control mr-20 my-3">
                 <div className='flex'>
                      <input ref={inputRef}  type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" required />    
                     <button onClick={(e) => handleSearch(e)} className='btn btn-outline ml-3 px-8'> Search</button>               
